@@ -1,0 +1,13 @@
+"DOTAAbilities"
+{
+	"Version" "1"
+
+	"item_divine_rapier"
+	{
+		"ItemPurchasable"				"0"
+	}
+	"item_desolator"
+	{
+		"ItemPurchasable"	"0"
+	}
+}

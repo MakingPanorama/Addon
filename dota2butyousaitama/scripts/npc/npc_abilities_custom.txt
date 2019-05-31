@@ -1,0 +1,351 @@
+// Dota Heroes File
+"DOTAAbilities"
+{
+	"Version"		"1"
+
+/// Custom Abilities
+///--------------------------------------------------------
+	"antimage_keck"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName" "hammer"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO"
+		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PHYSICAL"
+		"MaxLevel"	"1"
+		"RequiredLevel" "6"
+		"AbilityCastRange"	"150"
+		"AbilityCastPoint" "1.030"
+		"AbilityCooldown"	"13"
+		"AbilityDamage" "500"
+		"AbilitySpecial"
+		{
+			"1"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"damage"	"500"
+			}
+			"2"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"speed_kick"	"0.5"
+			}
+			"3"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"distance_kick"	"1000"
+			}
+			"4"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"height_air"	"100"
+			}
+		}
+		"OnSpellStart"
+		{
+			"Damage"
+			{
+				"Target"	"TARGET"
+				"Type"	"DAMAGE_TYPE_PHYSICAL"
+				"Damage"	"%damage"
+			}
+			"Knockback"
+			{
+				"Target"	"TARGET"
+				"Center"	"CASTER"
+				"Duration"	"%speed_kick"
+				"Distance"	"%distance_kick"
+				"Height"	"%height_air"
+				"IsFixedDistance"	"1"
+				"ShouldStun"	"0"
+			}
+			"ApplyModifier"
+			{
+				"Target"	"TARGET"
+				"ModifierName"	"modifier_air_mage"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_air_mage"
+			{
+				"IsDebuff"	"1"
+				"Duration" "%speed_kick"
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_INVISIBLE"	"MODIFIER_STATE_VALUE_ENABLED" 
+				}
+			}
+		}
+	}				
+		"tusk_modifier_lox"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"Warlusloss"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+    	"AbilityCooldown"				"8.0"
+   	 	"AbilityCastRange"				"150"
+   	 	"AbilityManaCost"				"0"
+    	"AbilityDamage" "200"
+    	"AbilitySpecial"
+   	 	{
+    		"1"
+    		{
+    			"var_type"		"FIELD_INTEGER"
+    			"duration"		"5"
+    		}
+    		"2"
+    		{
+    			"var_type" "FIELD_INTEGER"
+    			"piar" "5"
+    		}
+    		"3"
+    		{
+    			"var_type" "FIELD_INTEGER"
+    			"distancepiz" "3000"
+    		}
+    		"4"
+    		{
+    			"var_type"	"FIELD_INTEGER"
+    			"damage" "200"
+    		}
+    	
+    	}
+    	"OnSpellStart"
+    	{
+    		"Knockback"
+    		{
+    			"Target"            "TARGET"
+    			"Center" 	        "CASTER"
+    			"Distance"	        "%distancepiz"
+    			"Duration"	        "%piar"
+    			"Height"	        "10000"
+    			"IsFixedDistance"	"1"
+    			"ShouldStun"        "0"	
+    		}
+        	"ApplyModifier"
+        	{
+        		"ModifierName"	"modifier_tusk_saitama"
+        		"Target" 		"TARGET" ///Короче тут лох сайтама
+        	}
+    	}
+    	"Modifiers"
+    	{
+    		"modifier_tusk_saitama"
+    		{
+    			"IsDebuff"			"1"
+    			"Duration" "%piar"
+    			"Properties"
+    			{
+    				"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "-30000000"   		     
+    			}
+    			"States"
+    			{
+    				"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
+    				"MODIFIER_STATE_INVULNERABLE" 	"MODIFIER_STATE_VALUE_ENABLED"
+    				"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
+    				"MODIFIER_STATE_NOT_ON_MINIMAP"	"MODIFIER_STATE_VALUE_ENABLED"
+    				"MODIFIER_STATE_NOT_ON_MINIMAP_FOR_ENEMIES"	"MODIFIER_STATE_VALUE_ENABLED"
+    				"MODIFIER_STATE_FLYING"		"MODIFIER_STATE_VALUE_ENABLED"
+    				"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+    			}
+    		}
+    	}
+	}
+
+	"tusk_damage"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityTextureName"			"ability_name"
+		"MaxLevel" 						"6"
+		"AbilitySpecial"
+		{
+			"1"
+			{
+				"var_type"			"FIELD_INTEGER"
+				"damage_bonus"			"20 36 57 80 90 95"
+			}
+		}
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_damage"
+				"Target" 		"TARGET"
+				"Duration"		"%duration"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_damage"
+			{
+				"Passive"			"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE" "%damage_bonus"
+				}
+			}
+		}
+	}
+
+	"Jump"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"sniper_headshot"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityCooldown"				"500"
+
+		"OnSpellStart"
+		{
+			"Knockback"
+			{
+				"Target" "CASTER"
+				"Center" "POINT"
+				"Duration"	        "1"
+				"Height"	        "450"
+				"IsFixedDistance"	"1"
+				"ShouldStun"        "0"	
+			}
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_jump"
+				"Target" 		"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_jump"
+			{
+				"IsHidden"			"1"
+				"Duration" "1"
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_STUNNED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+	
+	"tusk_shut_up"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"death_prophet_silence"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_UNIT_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_ENEMY"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"AbilityCastRange"				"500"
+		"AbilityCastPoint" 				"1"
+		"AbilityCooldown" 				"20"
+		
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_shut_up_idiot"
+				"Target" 		"TARGET"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_shut_up_idiot"
+			{
+				"IsDebuff"			"1"
+				"Duration"			"3"
+				"States"
+				{
+					"MODIFIER_STATE_NIGHTMARED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_BLIND" 			"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_SILENCED"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_MUTED"			"MODIFIER_STATE_VALUE_ENABLED"
+			    }
+			}
+		}
+	}
+
+	"tusk_invulnerable"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"lich_sinister_gaze"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET | DOTA_ABILITY_BEHAVIOR_IMMEDIATE "
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO"
+		"RequiredLevel"		"6"
+		"AbilityManaCost"	"300"
+		"AbilityCooldown"	"200"
+		"MaxLevel" 			"1"
+
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_chance_escape_death_invulnerable"
+				"Target" 		"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_chance_escape_death_invulnerable"
+			{
+				"IsBuff" "1"
+				"Duration"	"0.5"
+				"States"
+				{
+					"MODIFIER_STATE_INVULNERABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_HEALTH_BAR"		"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_DISABLED"			"MODIFIER_STATE_VALUE_ENABLED"
+				}
+			}
+		}
+	}
+	
+	"tusk_flying"
+	{
+		"BaseClass"             		"ability_datadriven"
+		"AbilityTextureName"			"ability_name"
+		"MaxLevel" 						"1"
+		"AbilityBehavior"				"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityUnitTargetTeam"			"DOTA_UNIT_TARGET_TEAM_BOTH"
+		"AbilityUnitTargetType"			"DOTA_UNIT_TARGET_HERO" 
+		"AbilityCooldown"				"70"
+		
+		"OnSpellStart"
+		{
+			"ApplyModifier"
+			{
+				"ModifierName"	"modifier_fly"
+				"Target" 		"CASTER"
+			}
+		}
+		"Modifiers"
+		{
+			"modifier_fly"
+			{
+				"IsBuff"			"1"
+				"Duration"			"5"
+				"States"
+				{
+					"MODIFIER_STATE_FLYING"		"MODIFIER_STATE_VALUE_ENABLED"
+				}
+				"Properties"
+				{
+				    "MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE" "880" 
+				}
+			}
+		}
+	}
+}				
+		
